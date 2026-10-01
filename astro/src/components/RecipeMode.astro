@@ -1,0 +1,59 @@
+<fieldset class="fieldset not-prose">
+  <label class="label">
+    <input type="checkbox" class="toggle" autocomplete="off" data-recipe-mode />
+    Recipe mode
+  </label>
+  <p class="label hidden" data-recipe-mode-unsupported>
+    Not supported in this browser
+  </p>
+</fieldset>
+
+<script>
+  let wakeLock: WakeLockSentinel | null = null;
+
+  const toggle = document.querySelector<HTMLInputElement>("[data-recipe-mode]");
+  const unsupported = document.querySelector<HTMLElement>(
+    "[data-recipe-mode-unsupported]",
+  );
+
+  async function requestWakeLock() {
+    console.log("activating recipe mode");
+    try {
+      wakeLock = await navigator.wakeLock.request("screen");
+      wakeLock.addEventListener("release", () => {
+        wakeLock = null;
+      });
+    } catch (err) {
+      console.error("Could not keep screen awake:", err);
+      if (toggle) toggle.checked = false;
+    }
+  }
+
+  async function releaseWakeLock() {
+    console.log("deactivating recipe mode");
+    await wakeLock?.release();
+    wakeLock = null;
+  }
+
+  if (toggle) {
+    if (!("wakeLock" in navigator)) {
+      toggle.disabled = true;
+      unsupported?.classList.remove("hidden");
+    } else {
+      toggle.addEventListener("change", () => {
+        toggle.checked ? requestWakeLock() : releaseWakeLock();
+      });
+
+      // The browser releases the lock when the tab is hidden; re-acquire on return
+      document.addEventListener("visibilitychange", () => {
+        if (
+          document.visibilityState === "visible" &&
+          toggle.checked &&
+          !wakeLock
+        ) {
+          requestWakeLock();
+        }
+      });
+    }
+  }
+</script>
