@@ -9,7 +9,7 @@ importers:
   .:
     dependencies:
       astro:
-        specifier: ^7.3.5
+        specifier: 7.3.5
         version: 7.3.5
 
 packages:
