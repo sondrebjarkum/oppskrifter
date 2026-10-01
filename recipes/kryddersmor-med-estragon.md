@@ -1,5 +1,5 @@
 ---
-category: saus
+category: sauser
 title: Bountykladdkake
 ---
 
