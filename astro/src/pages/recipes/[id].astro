@@ -1,16 +1,28 @@
 ---
-import { getCollection, render } from 'astro:content';
-import Layout from '../../layouts/Layout.astro';
+import { getCollection, render } from "astro:content";
+import Layout from "../../layouts/Layout.astro";
+import RecipeMode from "../../components/RecipeMode.astro";
 
 export async function getStaticPaths() {
-  const recipes = await getCollection('recipes');
-  return recipes.map((recipe) => ({ params: { id: recipe.id }, props: { recipe } }));
+  const recipes = await getCollection("recipes");
+  return recipes.map((recipe) => ({
+    params: { id: recipe.id },
+    props: { recipe },
+  }));
 }
 
 const { recipe } = Astro.props;
 const { Content } = await render(recipe);
 const title = recipe.body?.match(/^#\s+(.+)$/m)?.[1].trim() ?? recipe.id;
 ---
+
 <Layout title={title}>
-  <Content />
+  <article class="prose lg:prose-lg mx-auto">
+    <div class="flex gap-4 justify-between">
+      <RecipeMode />
+      <button class="link text-sm">Download pdf</button>
+    </div>
+    <hr class="mt-4! mb-12!">
+    <Content />
+  </article>
 </Layout>
