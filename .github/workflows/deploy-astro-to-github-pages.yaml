@@ -18,6 +18,7 @@ jobs:
       - uses: withastro/action@v3
         with:
           path: ./astro
+          package-manager: pnpm@latest
 
   deploy:
     needs: build
