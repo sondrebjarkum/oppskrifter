@@ -10,7 +10,7 @@ title: Bountykladdkake
 - 1 ss olivenolje
 - 1 løk, hakket
 - 5-6 hvitløksfedd, finhakket
-- 300 g chorizo, uten skinn
+- 600 g chorizo, uten skinn
 - 300 g vegetarkjøttdeig
 - 2 bokser hele tomater (ca. 800 g)
 - 3 ss tomatpuré
