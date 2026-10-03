@@ -1,36 +1,28 @@
 ---
 category: tilbehør/småretter
-title: Bountykladdkake
+title: Hasselbackpoteter
 ---
 
 # Hasselbackpoteter
 
 ## Ingredienser
 
-- 8–10 poteter (Agria eller Yukon Gold)
-- 2–3 liter storfekraft (kan erstattes med kyllingkraft eller grønnsakskraft)
-- 170 g klarnet smør
-- 5 g rosmarin
-- 5 g timian
-- 5 g hvitløk, knust
-- 25 g usaltet smør, kaldt og i terninger
-- En skvis sitronsaft
-- Gressløk
+- 8–10 lyse poteter
+- Storfekraft, nok til å dekke potetene 1/3 - 2/3 i ildfast form (kan erstattes med kyllingkraft eller grønnsakskraft)
+- Smør, generøse mengder
+- Rosmarin, gjerne ferske kvaster
+- Timian, gjerne ferske kvaster
+- Hvitløk, hele fedd, såå mange du føler for
 - Salt
+- Gressløk, til glazen
 
 ## Fremgangsmåte
 
-1. Stikk et grillspyd gjennom bunnen av potetene. Skjær eventuelt av litt av bunnen dersom
-den er ujevn, slik at poteten står stødig. Skjær tynne, jevne skiver ned mot spydet uten å
-skjære helt gjennom. La spydene sitte i under hele tilberedningen.
-2. Legg potetene i en stor gryte med tykk bunn og dekk dem med kraft. Kok opp, senk
-varmen og la dem småkoke til kraften er redusert litt og potetene er gjennomkokte.
-3. Ta potetene forsiktig ut av gryten.
-4. Legg potetene i en ren ildfast form. Hell over omtrent en tredjedel av kraften, og tilsett
-kaldt smør, klarnet smør, salt, hvitløk, rosmarin og timian.
-5. Stek potetene ved 225 °C i 25–35 minutter. Øs over smør- og kraftblandingen hvert
-5.–10. minutt.
-6. Ha resten av kraften i en kjele og kok den forsiktig inn til en tykkere glasurkonsistens.
-Rør inn litt gressløk.
-7. Ta potetene ut av formen og fjern grillspydene.
-8. Hell glasuren over potetene før servering.
+1. Lag en snittflate ved å skjære av litt av bunnen av potetene slik at de kan stå av seg selv
+1. Stikk grillspyd gjennom bunnen av potetene. Skjær tynne, jevne skiver ned mot spydet. La spydene sitte i under hele tilberedningen.
+1. Legg potetene i en gryte med potetskivene ned og dekk dem cirka 1/2 med kraft. Kok opp og la potetene lett posjeres til de blir myke (cirka 5-10 minutter, avhengig av str. på potetene)
+1. Overfør potetene til en ildfast form med snittflaten ned. Hell over nok kraft til at potene dekkes mellom 1/3 og 2/3, og tilsett smør, salt, hvitløk, rosmarin og timian.
+1. Bruk en generøs mengde smør, og trykk smøret ned i potetskivene.
+1. Stek potetene ved 225 °C i 25–35 minutter. Øs over smør- og kraftblandingen ved jevne mellomrom.
+1. Etter steking, overfør potetene til et fat og hell den gjenværende kraften over i en panne. Kok kraften under konstant røring frem til du har en tykk glaze. Avslutt glzen ved å røre inn litt gressløk.
+1. Fjern grillspydene fra potetene og hell glazen over før servering.
