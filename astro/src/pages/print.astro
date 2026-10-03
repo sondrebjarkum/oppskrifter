@@ -1,0 +1,101 @@
+---
+import { getCollection, render } from "astro:content";
+import Layout from "../layouts/Layout.astro";
+import ThemeOverride from "../components/ThemeOverride.astro";
+
+const compare = (a: string, b: string) =>
+  a.localeCompare(b, "nb", { sensitivity: "base" });
+
+const recipes = await Promise.all(
+  (await getCollection("recipes")).map(async (r) => ({
+    category: r.data.category,
+    title: r.body?.match(/^#\s+(.+)$/m)?.[1].trim() ?? r.id,
+    Content: (await render(r)).Content,
+  })),
+);
+
+recipes.sort(
+  (a, b) => compare(a.category, b.category) || compare(a.title, b.title),
+);
+---
+<ThemeOverride theme="light" />
+<Layout title="Alle oppskrifter">
+  {
+    recipes.map(({ title, Content }) => (
+      <article
+        class="recipe prose max-w-none mx-auto break-after-page print:overflow-hidden last:break-after-auto"
+        style="height: 280mm !important;"
+        data-recipe
+        data-id={title}
+      >
+        <Content />
+      </article>
+    ))
+  }
+</Layout>
+<script is:inline>
+  document.documentElement.setAttribute("data-theme", "light");
+</script>
+<script>
+  const recipe = new URLSearchParams(location.search).get("recipe");
+
+  if (recipe) {
+    document.querySelectorAll<HTMLElement>("[data-recipe]").forEach((el) => {
+      if (el.dataset.id !== recipe) el.remove();
+    });
+  }
+
+  window.addEventListener("load", () => window.print());
+</script>
+
+<style is:global>
+  @page {
+    size: A4;
+    margin: 12mm;
+  }
+  .recipe {
+    ul {
+      columns: 2;
+      column-gap: 1.5rem;
+    }
+
+    ul > li {
+      break-inside: avoid;
+    }
+
+    ol {
+      columns: 2;
+      column-gap: 1.5rem;
+    }
+
+    ol > li {
+      break-inside: avoid;
+    }
+
+    li {
+      margin: 0;
+    }
+
+    h1 {
+      margin-bottom: 1rem;
+    }
+
+    h2 {
+      margin-top: 0.5rem;
+      margin-bottom: 1rem;
+    }
+
+    /* for long recipes */
+
+    ul:has(> li:nth-child(15)) {
+      columns: 3;
+      font-size: 0.775rem;
+      column-gap: 1rem;
+    }
+
+    ol:has(> li:nth-child(7)) {
+      columns: 3;
+      font-size: 0.775rem;
+    }
+  }
+</style>

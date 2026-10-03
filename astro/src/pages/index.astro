@@ -1,6 +1,9 @@
 ---
 import { getCollection } from "astro:content";
 import Layout from "../layouts/Layout.astro";
+import RecipeSearch from "../components/RecipeSearch.astro";
+import Toolbar from "../components/Toolbar.astro";
+import Print from "../components/Print.astro";
 
 const compare = (a, b) => a.localeCompare(b, "nb", { sensitivity: "base" });
 const base = import.meta.env.BASE_URL.replace(/\/$/, "");
@@ -16,17 +19,21 @@ const categories = Object.keys(grouped).sort(compare);
 ---
 
 <Layout title="Oppskrifter">
-  <div class="prose lg:prose-lg mx-auto">
+  <Toolbar>
+    <RecipeSearch />
+    <Print />
+  </Toolbar>
+  <div class="prose lg:prose-lg max-w-none mx-auto">
     <h1>Oppskrifter</h1>
     {
       categories.map((category) => (
-        <section>
+        <section data-category>
           <h2>{category.charAt(0).toUpperCase() + category.slice(1)}</h2>
           <ul>
             {grouped[category]
               .sort((a, b) => compare(a.title, b.title))
               .map((r) => (
-                <li>
+                <li data-title={r.title.toLocaleLowerCase("nb")}>
                   <a href={`${base}/recipes/${r.id}/`}>{r.title}</a>
                 </li>
               ))}
