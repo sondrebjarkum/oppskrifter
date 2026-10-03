@@ -1,6 +1,7 @@
 ---
 category: tilbehør/småretter
 title: Hasselbackpoteter
+source: https://www.youtube.com/shorts/qeOEDUgy5xA
 ---
 
 # Hasselbackpoteter
