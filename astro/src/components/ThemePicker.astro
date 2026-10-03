@@ -60,3 +60,23 @@
     />
   </li>
 </ul>
+
+<script>
+  const saved = localStorage.getItem("theme") ?? "default";
+  const radios = document.querySelectorAll<HTMLInputElement>(
+    'input[name="theme-buttons"]'
+  );
+
+  radios.forEach((radio) => {
+    radio.checked = radio.value === saved;
+    radio.addEventListener("change", () => {
+      if (!radio.checked) return;
+      localStorage.setItem("theme", radio.value);
+      if (radio.value === "default") {
+        document.documentElement.removeAttribute("data-theme");
+      } else {
+        document.documentElement.setAttribute("data-theme", radio.value);
+      }
+    });
+  });
+</script>
