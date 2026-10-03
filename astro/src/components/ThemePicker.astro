@@ -64,18 +64,23 @@
 <script>
   const saved = localStorage.getItem("theme") ?? "default";
   const radios = document.querySelectorAll<HTMLInputElement>(
-    'input[name="theme-buttons"]'
+    'input[name="theme-buttons"]',
   );
 
   radios.forEach((radio) => {
     radio.checked = radio.value === saved;
+
+    function setTheme(radioValue: string) {
+      localStorage.setItem("theme", radioValue);
+
+      radio.value === "default"
+        ? document.documentElement.removeAttribute("data-theme")
+        : document.documentElement.setAttribute("data-theme", radioValue);
+    }
+
     radio.addEventListener("change", () => {
-      if (!radio.checked) return;
-      localStorage.setItem("theme", radio.value);
-      if (radio.value === "default") {
-        document.documentElement.removeAttribute("data-theme");
-      } else {
-        document.documentElement.setAttribute("data-theme", radio.value);
+      if (radio.checked) {
+        setTheme(radio.value);
       }
     });
   });
