@@ -5,6 +5,8 @@ title: Bountykladdkake
 
 # Riskrem med mascarpone (4 porsjoner)
 
+Perfekt tilbehør: [Appelsinsaus til riskrem](/oppskrifter/recipes/appelsinsaus-til-riskrem)
+
 ## Ingredienser
 
 - 100 g sukker
