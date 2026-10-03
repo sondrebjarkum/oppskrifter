@@ -1,6 +1,8 @@
 @import "tailwindcss";
 @plugin "@tailwindcss/typography";
-@plugin "daisyui";
+@plugin "daisyui" {
+  themes: light --default, dark --prefersdark, retro;
+}
 
 @theme {
   --font-sans: Helvetica, Arial, sans-serif;

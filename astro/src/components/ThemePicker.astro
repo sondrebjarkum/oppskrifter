@@ -1,0 +1,62 @@
+<button
+  class="btn btn-sm"
+  popovertarget="theme-picker"
+  style="anchor-name:--theme-picker"
+>
+  <svg
+    xmlns="http://www.w3.org/2000/svg"
+    width="20"
+    height="20"
+    viewBox="0 0 24 24"
+    fill="none"
+    stroke="currentColor"
+    stroke-width="2"
+    stroke-linecap="round"
+    stroke-linejoin="round"
+  >
+    <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+  </svg>
+</button>
+<ul
+  class="dropdown menu w-52 rounded-box bg-base-100 shadow-md p-0 flex mt-1"
+  popover
+  id="theme-picker"
+  style="position-anchor:--theme-picker"
+>
+  <li>
+    <input
+      type="radio"
+      name="theme-buttons"
+      class="btn btn-ghost theme-controller"
+      aria-label="Default"
+      value="default"
+    />
+  </li>
+  <li>
+    <input
+      type="radio"
+      name="theme-buttons"
+      class="btn btn-ghost theme-controller"
+      aria-label="Light"
+      value="light"
+    />
+  </li>
+  <li>
+    <input
+      type="radio"
+      name="theme-buttons"
+      class="btn btn-ghost theme-controller"
+      aria-label="Dark"
+      value="dark"
+    />
+  </li>
+  <li>
+    <input
+      type="radio"
+      name="theme-buttons"
+      class="btn btn-ghost theme-controller"
+      aria-label="Retro"
+      value="retro"
+    />
+  </li>
+</ul>

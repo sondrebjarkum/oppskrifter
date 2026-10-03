@@ -1,4 +1,5 @@
 ---
+import ThemePicker from "../components/ThemePicker.astro";
 import "../styles/global.css";
 const { title } = Astro.props;
 const base = import.meta.env.BASE_URL.replace(/\/$/, "");
@@ -14,10 +15,17 @@ const base = import.meta.env.BASE_URL.replace(/\/$/, "");
     <title>{title}</title>
   </head>
   <body>
-    <nav class="navbar bg-base-100 shadow-sm mb-12">
-      <a href={`${base}/`} class="btn btn-ghost text-xl">Hjem</a>
-    </nav>
-    <main class="ml-6 mr-6">
+    <div class="navbar bg-base-100 shadow-sm mb-12 justify-center pl-0 pr-0">
+      <nav class="flex justify-between w-full max-w-2xl ml-6 mr-6">
+        <div class="breadcrumbs text-sm">
+          <ul>
+            <li><a href={`${base}/`}>Home</a></li>
+          </ul>
+        </div>
+        <ThemePicker />
+      </nav>
+    </div>
+    <main class="ml-6 mr-6 pb-12">
       <slot />
     </main>
   </body>
