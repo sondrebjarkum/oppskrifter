@@ -12,7 +12,7 @@ title: Hasselbackpoteter
 - Smør, generøse mengder
 - Rosmarin, gjerne ferske kvaster
 - Timian, gjerne ferske kvaster
-- Hvitløk, hele fedd, såå mange du føler for
+- Hvitløk, hele fedd, så mange du føler for
 - Salt
 - Gressløk, til glazen
 
