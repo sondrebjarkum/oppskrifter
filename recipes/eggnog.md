@@ -10,7 +10,7 @@ Smaker best etter to til tre uker lagring i kjøleskap.
 
 ## Ingredienser (ca 1 liter)
 - 250 ml **kremfløte**
-- 250 ml **helmelk** (eller kremfløte, eller en blanding)
+- 250 ml **helmelk**, (eller kremfløte, eller en blanding)
 - 110 g **sukker**
 - 2 **egg**, hele
 - 250 ml **rom**

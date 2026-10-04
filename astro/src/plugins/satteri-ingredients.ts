@@ -5,7 +5,7 @@ function textOf(node: any) {
   return (node.children ?? []).map(textOf).join("");
 }
 
-export default function satteriIngredients({ heading = /^ingredienser$/i } = {}) {
+export default function satteriIngredients({ heading = /^ingredienser\b/i, } = {}) {
   let inIngredients = false;
 
   return defineHastPlugin({

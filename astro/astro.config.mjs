@@ -11,7 +11,7 @@ export default defineConfig({
   },
   markdown: {
     processor: satteri({
-      hastPlugins: [sattertiIngredients]
+      hastPlugins: [sattertiIngredients()]
     }),
   },
 });
