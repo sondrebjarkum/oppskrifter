@@ -43,7 +43,7 @@ const grouped = Object.entries(Object.groupBy(recipes, (r) => r.category))
     </div>
   </Toolbar>
   <div class="prose lg:prose-lg max-w-none mx-auto">
-    <h1>Oppskrifter</h1>
+    <h1 class="sr-only">Oppskrifter</h1>
     {
       grouped.map(({ category, subs }) => (
         <section data-category>
