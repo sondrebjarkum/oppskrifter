@@ -1,0 +1,117 @@
+---
+const { title, time } = Astro.props;
+---
+
+<fieldset
+  class="fieldset bg-base-200 border-base-300 rounded-box border px-4 pt-1 pb-4 w-full sm:max-w-xl"
+  data-timer
+  data-seconds={time * 60}
+>
+  <legend class="fieldset-legend">{title}</legend>
+
+  <div class="flex justify-between gap-2">
+    <div class="flex items-center gap-2 w-full">
+      <progress
+        data-progress
+        class="progress w-full"
+        value={time * 60}
+        max={time * 60}></progress>
+      <span data-display class="text-base">{time}:00</span>
+    </div>
+    <button class="btn btn-circle" data-toggle>
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        fill="none"
+        viewBox="0 0 24 24"
+        stroke-width="1.5"
+        stroke="currentColor"
+        class="size-6 play-icon"
+      >
+        <path
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          d="M5.25 5.653c0-.856.917-1.398 1.667-.986l11.54 6.347a1.125 1.125 0 0 1 0 1.972l-11.54 6.347a1.125 1.125 0 0 1-1.667-.986V5.653Z"
+        ></path>
+      </svg>
+
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        fill="none"
+        viewBox="0 0 24 24"
+        stroke-width="1.5"
+        stroke="currentColor"
+        class="size-6 pause-icon hidden"
+      >
+        <path
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          d="M15.75 5.25v13.5m-7.5-13.5v13.5"></path>
+      </svg>
+    </button>
+  </div>
+</fieldset>
+
+<script>
+  function playAlarm() {
+    const ctx = new AudioContext();
+    const rounds = 4;
+    const beepsPerRound = 3;
+    const beepLength = 0.08;
+    const beepGap = 0.1; // time from start of one beep to the next
+    const roundGap = 1; // time from start of one round to the next
+
+    for (let r = 0; r < rounds; r++) {
+      for (let b = 0; b < beepsPerRound; b++) {
+        const start = ctx.currentTime + r * roundGap + b * beepGap;
+        const osc = ctx.createOscillator();
+        osc.frequency.value = 1080;
+        osc.connect(ctx.destination);
+        osc.start(start);
+        osc.stop(start + beepLength);
+      }
+    }
+  }
+
+  document.querySelectorAll<HTMLElement>("[data-timer]").forEach((timer) => {
+    let remaining = Number(timer.dataset.seconds);
+    let interval: number | undefined;
+    const display = timer.querySelector("[data-display]")!;
+    const progress = timer.querySelector("[data-progress]")!;
+    const button = timer.querySelector("[data-toggle]")!;
+    const play = timer.querySelector(".play-icon")!;
+    const pause = timer.querySelector(".pause-icon")!;
+
+    function showPlayIcon() {
+      play.classList.remove("hidden");
+      pause.classList.add("hidden");
+    }
+
+    function showPauseIcon() {
+      play.classList.add("hidden");
+      pause.classList.remove("hidden");
+    }
+
+    button.addEventListener("click", () => {
+      if (interval) {
+        clearInterval(interval);
+        interval = undefined;
+        showPlayIcon();
+        return;
+      }
+      showPauseIcon();
+      interval = setInterval(() => {
+        remaining--;
+        const m = Math.floor(remaining / 60);
+        const s = (remaining % 60).toString().padStart(2, "0");
+        display.textContent = `${m}:${s}`;
+        progress.setAttribute("value", remaining.toString());
+
+        if (remaining <= 0) {
+          clearInterval(interval);
+          interval = undefined;
+          playAlarm();
+        }
+      }, 1000);
+    });
+  });
+</script>

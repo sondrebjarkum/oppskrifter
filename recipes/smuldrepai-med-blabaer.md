@@ -1,16 +1,19 @@
 ---
 category: dessert
 title: Smuldrepai med blåbær
+timers: [{title: Bak paien, time: 30}, {title: Bak paien + 10 min, time: 10}, {title: Test, time: 0.1}]
 ---
 
 # Smuldrepai med blåbær
 
 ## Ingredienser
 
+#### Blåbær
 - 500 g blåbær
-- ½ dl sukker
+- 1 dl sukker, juster etter ønsket sødme
 - 2 ss potetmel
-- Havredeig
+
+#### Havredeig
 - 150 g smør
 - ½ dl lys sirup
 - 1 dl kremfløte

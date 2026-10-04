@@ -4,6 +4,7 @@ import Layout from "../../layouts/Layout.astro";
 import RecipeMode from "../../components/RecipeMode.astro";
 import Toolbar from "../../components/Toolbar.astro";
 import Print from "../../components/Print.astro";
+import RecipeTimer from "../../components/RecipeTimer.astro";
 
 export async function getStaticPaths() {
   const recipes = await getCollection("recipes");
@@ -16,6 +17,7 @@ export async function getStaticPaths() {
 const { recipe } = Astro.props;
 const { Content } = await render(recipe);
 const title = recipe.body?.match(/^#\s+(.+)$/m)?.[1].trim() ?? recipe.id;
+const timers = recipe.data.timers;
 ---
 
 <Layout title={title}>
@@ -26,4 +28,15 @@ const title = recipe.body?.match(/^#\s+(.+)$/m)?.[1].trim() ?? recipe.id;
   <article class="prose lg:prose-lg max-w-none mx-auto">
     <Content />
   </article>
+
+  {
+    timers && (
+      <hr class="mt-4 mb-12 print:hidden opacity-20">
+      <div class="flex flex-col gap-4 sm:gap-0">
+        {timers.map((t) => {
+          return <RecipeTimer title={t.title} time={t.time} />;
+        })}
+      </div>
+    )
+  }
 </Layout>
