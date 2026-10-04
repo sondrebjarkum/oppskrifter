@@ -26,25 +26,34 @@
 
 <script>
   const input = document.getElementById("recipe-search") as HTMLInputElement;
+  const favoritesCheckbox = document.getElementById("recipe-favorites") as HTMLInputElement;
   const sections = document.querySelectorAll<HTMLElement>(
     "section[data-category]",
   );
 
   const filter = () => {
     const query = input.value.trim().toLocaleLowerCase("nb");
+    const useFavorites = favoritesCheckbox.checked;
 
     sections.forEach((section) => {
       let sectionVisible = false;
       section.querySelectorAll<HTMLElement>("li[data-title]").forEach((li) => {
-        const match = li.dataset.title!.includes(query);
+        const matchesQuery = li.dataset.title!.includes(query);
+        const matchesFavorite = !useFavorites || li.dataset.title!.includes("⭐");
+        const match = matchesQuery && matchesFavorite;
         li.hidden = !match;
         if (match) sectionVisible = true;
       });
       section.hidden = !sectionVisible;
     });
+
+    document.querySelectorAll("[data-subcategory]").forEach((el: any) => {
+      el.hidden = !el.querySelector("li:not([hidden])");
+    });
   };
 
   input.addEventListener("input", filter);
+  favoritesCheckbox.addEventListener("change", filter)
 
   document.addEventListener("keydown", (e) => {
     if (e.metaKey && e.key.toLowerCase() === "k") {
