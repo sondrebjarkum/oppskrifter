@@ -3,8 +3,6 @@
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
-    "build": "node ./scripts/generate-toc.js",
-    "toc": "pnpm build",
     "recipe": "node ./scripts/generate-recipe.js",
     "pdf": "node ./scripts/generate-pdf.js"
   },
