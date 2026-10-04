@@ -1,0 +1,184 @@
+<button
+  id="view-shoppinglist"
+  class="btn btn-ghost btn-square"
+  onclick="shopping_list_modal.showModal()"
+>
+  <svg
+    xmlns="http://www.w3.org/2000/svg"
+    fill="none"
+    viewBox="0 0 24 24"
+    stroke-width="1.5"
+    stroke="currentColor"
+    class="size-6"
+  >
+    <path
+      stroke-linecap="round"
+      stroke-linejoin="round"
+      d="M8.25 6.75h12M8.25 12h12m-12 5.25h12M3.75 6.75h.007v.008H3.75V6.75Zm.375 0a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0ZM3.75 12h.007v.008H3.75V12Zm.375 0a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0Zm-.375 5.25h.007v.008H3.75v-.008Zm.375 0a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0Z"
+    ></path>
+  </svg>
+</button>
+<dialog id="shopping_list_modal" class="modal">
+  <div class="modal-box">
+    <h3 class="text-lg font-bold">Shopppingslist</h3>
+    <!-- add item -->
+    <form id="form-shopinglist-add-item">
+      <div class="join w-full">
+        <div class="w-full">
+          <label class="input validator join-item w-full">
+            <input class="w-full" type="text" placeholder="Legg til" required />
+          </label>
+          <div class="validator-hint hidden">Kun tekst</div>
+        </div>
+        <button class="btn btn-neutral join-item">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke-width="1.5"
+            stroke="currentColor"
+            class="size-6"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              d="m4.5 12.75 6 6 9-13.5"></path>
+          </svg>
+        </button>
+      </div>
+    </form>
+
+    <!-- list items -->
+    <ul
+      class="list bg-base-100 rounded-box max-h-96 overflow-auto"
+      id="shoppinglist-content"
+    >
+    </ul>
+
+    <div class="modal-action">
+      <form method="dialog">
+        <button class="btn">Close</button>
+      </form>
+    </div>
+  </div>
+</dialog>
+
+<script>
+  import { verifySession } from "../integrations/supabase/auth.js";
+  import { supabase } from "../integrations/supabase/supabase-client.js";
+
+  const viewShoppinglist = document.getElementById(
+    "view-shoppinglist",
+  ) as HTMLButtonElement;
+  const shoppinglistContent = document.getElementById("shoppinglist-content");
+
+  viewShoppinglist.addEventListener("click", async () => {
+    const items = await getShoppinglistItems();
+    if (!items || !shoppinglistContent) return;
+
+    shoppinglistContent.replaceChildren();
+
+    items.forEach((item) => {
+      const li = document.createElement("li");
+      li.textContent = item.title;
+      li.classList.add("list-row");
+      shoppinglistContent.appendChild(li);
+    });
+  });
+
+  async function getShoppinglistItems() {
+    if (!(await verifySession())) return [];
+
+    const { data, error } = await supabase
+      .from("shoppinglistitems")
+      .select("*");
+
+    if (error) {
+      console.error("Could not fetch shopping list:", error);
+      return [];
+    }
+
+    return data.reverse();
+  }
+
+  const addItemForm = document.getElementById(
+    "form-shopinglist-add-item",
+  ) as HTMLFormElement;
+
+  viewShoppinglist.addEventListener("click", refreshShoppinglist);
+
+  async function refreshShoppinglist() {
+    const items = await getShoppinglistItems();
+  if (!items || !shoppinglistContent) return;
+
+  shoppinglistContent.replaceChildren();
+
+  items.forEach((item) => {
+    const li = document.createElement("li");
+    li.id = `shoppinglist-item-${item.id}`;
+    li.classList.add("list-row", "flex", "items-center", "justify-between");
+
+    const title = document.createElement("span");
+    title.textContent = item.title;
+
+    const deleteButton = document.createElement("button");
+    deleteButton.type = "button";
+    deleteButton.className = "btn btn-ghost btn-sm btn-square";
+    deleteButton.textContent = "X";
+    deleteButton.setAttribute("aria-label", `Slett ${item.title}`);
+
+    deleteButton.addEventListener("click", async () => {
+      if (!(await verifySession())) return;
+
+      deleteButton.disabled = true;
+
+      try {
+        const { error } = await supabase
+          .from("shoppinglistitems")
+          .delete()
+          .eq("id", item.id);
+
+        if (error) {
+          console.error("Could not delete shopping list item:", error);
+          return;
+        }
+
+        await refreshShoppinglist();
+      } finally {
+        deleteButton.disabled = false;
+      }
+    });
+
+    li.append(title, deleteButton);
+    shoppinglistContent.appendChild(li);
+  });
+  }
+
+  addItemForm.addEventListener("submit", async (event) => {
+    event.preventDefault();
+
+    const input =
+      addItemForm.querySelector<HTMLInputElement>('input[type="text"]');
+    const title = input?.value.trim();
+    if (!title || !(await verifySession())) return;
+
+    const button = addItemForm.querySelector<HTMLButtonElement>("button");
+    if (button) button.disabled = true;
+
+    try {
+      const { error } = await supabase
+        .from("shoppinglistitems")
+        .insert({ title });
+
+      if (error) {
+        console.error("Could not add shopping list item:", error);
+        return;
+      }
+
+      addItemForm.reset();
+      await refreshShoppinglist();
+    } finally {
+      if (button) button.disabled = false;
+    }
+  });
+</script>

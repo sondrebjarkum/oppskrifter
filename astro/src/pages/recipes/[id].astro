@@ -6,6 +6,7 @@ import Toolbar from "../../components/Toolbar.astro";
 import Print from "../../components/Print.astro";
 import RecipeTimer from "../../components/RecipeTimer.astro";
 import ShoppinglistIntegration from "../../components/ShoppinglistIntegration.astro";
+import ViewShoppinglist from "../../components/ViewShoppinglist.astro";
 
 export async function getStaticPaths() {
   const recipes = await getCollection("recipes");
@@ -24,7 +25,10 @@ const timers = recipe.data.timers;
 <Layout title={title}>
   <Toolbar>
     <RecipeMode />
-    <Print />
+    <div class="flex gap-2">
+      <ViewShoppinglist />
+      <Print />
+    </div>
   </Toolbar>
   <article class="prose lg:prose-lg max-w-none mx-auto">
     <Content />
