@@ -6,11 +6,11 @@
   import { supabase } from "../integrations/supabase/supabase-client.js";
 
   const isLoggedIn = weakVerifySession();
+  const ingredientsLists = document.querySelectorAll("ul[data-ingredients]");
+  const lastUl = ingredientsLists[ingredientsLists.length - 1];
+  const orderBtn = document.createElement("button");
 
   if (isLoggedIn) {
-    const ingredientsLists = document.querySelectorAll("ul[data-ingredients]");
-    const lastUl = ingredientsLists[ingredientsLists.length - 1];
-    const orderBtn = document.createElement("button");
     orderBtn.id = "order-button";
     orderBtn.classList.add("btn", "group", "group-data-[is-loading]:disabled");
     orderBtn.innerText = "Legg til i handleliste";
@@ -26,7 +26,9 @@
       checkbox.type = "checkbox";
       checkbox.classList.add("mr-2");
       checkbox.classList.add("checkbox");
+      li.classList.add("list-none")
       li.prepend(checkbox);
+      ingredientsLists.forEach(ul => ul.classList.add("ps-0"))
     });
 
     async function addCheckedItemsToShoppinglist() {
