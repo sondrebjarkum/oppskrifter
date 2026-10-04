@@ -1,0 +1,93 @@
+<script>
+  import {
+    weakVerifySession,
+    verifySession,
+  } from "../integrations/supabase/auth.js";
+  import { supabase } from "../integrations/supabase/supabase-client.js";
+
+  const isLoggedIn = weakVerifySession();
+
+  if (isLoggedIn) {
+    const ingredientsLists = document.querySelectorAll("ul[data-ingredients]");
+    const lastUl = ingredientsLists[ingredientsLists.length - 1];
+    const orderBtn = document.createElement("button");
+    orderBtn.id = "order-button";
+    orderBtn.classList.add("btn", "group", "group-data-[is-loading]:disabled");
+    orderBtn.innerText = "Legg til i handleliste";
+    orderBtn.innerHTML += `<span class="loading loading-spinner loading-sm hidden group-data-[is-loading]:inline-block"></span>`;
+    orderBtn.addEventListener("click", addCheckedItemsToShoppinglist);
+    lastUl.after(orderBtn);
+
+    const ingredients = () =>
+      document.querySelectorAll("ul[data-ingredients] > li");
+
+    ingredients().forEach((li) => {
+      const checkbox = document.createElement("input");
+      checkbox.type = "checkbox";
+      checkbox.classList.add("mr-2");
+      checkbox.classList.add("checkbox");
+      li.prepend(checkbox);
+    });
+
+    async function addCheckedItemsToShoppinglist() {
+      const toAdd = [] as string[];
+      ingredients().forEach((e) => {
+        const isChecked = e.querySelector("input:checked");
+        if (isChecked) {
+          const text = (e.textContent ?? "").split(",")[0].trim();
+          toAdd.push(text);
+        }
+      });
+
+      if (toAdd.length) {
+        loading(true);
+        for (const item of toAdd) {
+          await postItems(item);
+        }
+        loading(false);
+      }
+    }
+  }
+
+  async function postItems(title: string) {
+    const verified = await verifySession();
+    if (!verified) {
+      return;
+    }
+
+    const email = localStorage.getItem("email");
+
+    const { error } = await supabase
+      .from("shoppinglistitems")
+      .insert([
+        {
+          title,
+          completed: false,
+          added_by: email,
+        },
+      ])
+      .select("id");
+
+    if (error) {
+      console.error("error:", error);
+      alert("Kunne ikke legge til handlelisten");
+      return;
+    }
+    const checkboxes = document.querySelectorAll<HTMLInputElement>(
+      "ul[data-ingredients] > li input",
+    );
+    checkboxes.forEach((cb) => {
+      cb.checked = false;
+    });
+  }
+
+  function loading(isLoading: boolean) {
+    const button = document.getElementById(
+      "order-button",
+    ) as HTMLButtonElement | null;
+    if (!button) return;
+
+    button.toggleAttribute("data-is-loading", isLoading);
+    button.disabled = isLoading;
+  }
+</script>

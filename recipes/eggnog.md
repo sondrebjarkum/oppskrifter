@@ -1,6 +1,6 @@
 ---
 category: drinker
-title: eggnog ⭐
+title: Eggnog ⭐
 source: https://www.youtube.com/watch?v=sflZWeCjdco
 ---
 

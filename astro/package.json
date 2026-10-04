@@ -12,9 +12,12 @@
     "astro": "astro"
   },
   "dependencies": {
+    "@astrojs/markdown-satteri": "0.4.2",
+    "@supabase/supabase-js": "2.117.2",
     "@tailwindcss/vite": "4.3.3",
     "astro": "7.3.5",
     "daisyui": "5.7.47",
+    "satteri": "0.10.5",
     "tailwindcss": "4.3.3"
   },
   "allowScripts": {

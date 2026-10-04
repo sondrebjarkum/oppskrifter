@@ -20,7 +20,7 @@ timers: [{title: Bak paien, time: 30}, {title: Bak paien + 10 min, time: 10}, {t
 - 2 dl **sukker**
 - 2 dl **hvetemel**
 - 1 ts **bakepulver**
-- 2,5 dl **havregryn** (små, lettkokte eller store, se tips)
+- 2,5 dl **havregryn**, (små, lettkokte eller store, se tips)
 
 ## Fremgangsmåte
 

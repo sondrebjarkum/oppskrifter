@@ -1,0 +1,101 @@
+---
+import Toolbar from "../components/Toolbar.astro";
+import Layout from "../layouts/Layout.astro";
+---
+
+<Layout title="Instillinger">
+  <Toolbar>
+    <h1 class="text-3xl">Innstillinger</h1>
+  </Toolbar>
+  <div class="grid place-items-center">
+    <form id="login_form" hidden>
+      <fieldset
+        class="fieldset bg-base-200 border-base-300 rounded-box w-xs border p-4"
+      >
+        <legend class="fieldset-legend">Login</legend>
+        <label class="label">Email</label>
+        <input
+          type="email"
+          name="email"
+          class="input"
+          placeholder="Email"
+          required
+        />
+        <label class="label">Password</label>
+        <input
+          type="password"
+          name="password"
+          class="input"
+          placeholder="Password"
+          required
+        />
+        <button class="btn btn-neutral mt-4">Login</button>
+      </fieldset>
+    </form>
+
+    <form id="logout_form" hidden>
+      <fieldset
+        class="fieldset bg-base-200 border-base-300 rounded-box w-xs border p-4"
+      >
+        <legend class="fieldset-legend">Logged in</legend>
+        <p id="logged-in-as">Logged in as</p>
+        <button class="btn btn-neutral mt-4">Logout</button>
+      </fieldset>
+    </form>
+  </div>
+</Layout>
+
+<script>
+  const loginForm = document.querySelector("#login_form");
+  const logoutForm = document.querySelector("#logout_form");
+
+  import { verifySession } from "../integrations/supabase/auth.js";
+
+  const isLoggedIn = await verifySession();
+  if (isLoggedIn) {
+    loginForm?.remove();
+    logoutForm?.removeAttribute("hidden");
+    document.getElementById("logged-in-as")!.innerText =
+      `Logged in as ${localStorage.getItem("email")}`;
+  } else {
+    logoutForm?.remove();
+    loginForm?.removeAttribute("hidden");
+  }
+</script>
+
+<script>
+  import { login, logOut } from "../integrations/supabase/auth.js";
+
+  const loginForm = document.querySelector("#login_form");
+
+  if (loginForm) {
+    loginForm.addEventListener("submit", async (e: any) => {
+      e.preventDefault();
+
+      const email = e.target.email?.value;
+      const password = e.target.password?.value;
+
+      if (!email || !password) {
+        alert("mangler epost eller passord");
+        return;
+      }
+
+      const ok = await login({
+        email,
+        password,
+      });
+
+      if (ok) {
+        window.location.reload();
+      }
+    });
+  }
+  const logoutForm = document.querySelector("#logout_form");
+
+  if (logoutForm) {
+    logoutForm.addEventListener("submit", async () => {
+      await logOut();
+      window.location.reload();
+    });
+  }
+</script>

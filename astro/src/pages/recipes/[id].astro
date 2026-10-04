@@ -5,6 +5,7 @@ import RecipeMode from "../../components/RecipeMode.astro";
 import Toolbar from "../../components/Toolbar.astro";
 import Print from "../../components/Print.astro";
 import RecipeTimer from "../../components/RecipeTimer.astro";
+import ShoppinglistIntegration from "../../components/ShoppinglistIntegration.astro";
 
 export async function getStaticPaths() {
   const recipes = await getCollection("recipes");
@@ -40,3 +41,4 @@ const timers = recipe.data.timers;
     )
   }
 </Layout>
+<ShoppinglistIntegration />
