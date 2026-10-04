@@ -1,6 +1,6 @@
 ---
 category: dessert
-title: Bountykladdkake
+title: Sprø vafler (ca. 10 plater)
 ---
 
 # Sprø vafler (ca. 10 plater)

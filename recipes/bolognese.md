@@ -1,6 +1,7 @@
 ---
 category: middag
-title: Bolognese
+subcategory: pasta
+title: Bolognese ⭐
 ---
 
 # Bolognese

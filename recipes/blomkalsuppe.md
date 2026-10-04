@@ -1,5 +1,6 @@
 ---
-category: supper
+category: middag
+subcategory: supper
 title: Blomkålsuppe
 ---
 

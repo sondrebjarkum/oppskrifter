@@ -1,6 +1,7 @@
 ---
 category: middag
-title: Bountykladdkake
+subcategory: kylling
+title: Kylling marsala
 ---
 
 # Kylling marsala

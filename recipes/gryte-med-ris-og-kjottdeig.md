@@ -1,6 +1,7 @@
 ---
 category: middag
-title: Bountykladdkake
+subcategory: gryter
+title: Gryte med ris og kjøttdeig
 ---
 
 # Gryte med ris og kjøttdeig

@@ -1,6 +1,7 @@
 ---
 category: middag
-title: Bountykladdkake
+subcategory: gryter
+title: Gulasj
 ---
 
 # Gulasj

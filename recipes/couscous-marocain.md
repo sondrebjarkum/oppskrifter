@@ -1,6 +1,7 @@
 ---
 category: middag
-title: Bountykladdkake
+subcategory: vegetar
+title: Couscous Marocain ⭐
 ---
 
 # Couscous Marocain

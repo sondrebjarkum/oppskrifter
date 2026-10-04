@@ -1,6 +1,6 @@
 ---
 category: dessert
-title: Bountykladdkake
+title: Bountykladdkake ⭐
 ---
 
 # Bountykladdkake

@@ -1,6 +1,7 @@
 ---
-category: supper
-title: Bountykladdkake
+category: middag
+subcategory: supper
+title: Fatous linsesuppe
 ---
 
 # Fatous linsesuppe

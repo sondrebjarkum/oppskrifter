@@ -1,5 +1,6 @@
 ---
 category: middag
+subcategory: vegetar
 title: Aubergine med japansk saus
 ---
 

@@ -1,6 +1,7 @@
 ---
 category: middag
-title: Bountykladdkake
+subcategory: pasta
+title: Garfield deluxe lasagne ⭐
 ---
 
 # Garfield deluxe lasagne

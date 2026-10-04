@@ -1,6 +1,6 @@
 ---
 category: sauser
-title: Bountykladdkake
+title: Jan Vardøens pizzasaus (8 pizzaer)
 ---
 
 # Jan Vardøens pizzasaus (8 pizzaer)

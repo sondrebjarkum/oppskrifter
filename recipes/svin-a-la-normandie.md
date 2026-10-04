@@ -1,6 +1,7 @@
 ---
 category: middag
-title: Bountykladdkake
+subcategory: gryter
+title: Svin a la Normandie ⭐
 ---
 # Svin a la Normandie
 

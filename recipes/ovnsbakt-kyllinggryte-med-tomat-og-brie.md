@@ -1,6 +1,7 @@
 ---
 category: middag
-title: Bountykladdkake
+subcategory: gryter
+title: Ovnsbakt kyllinggryte med tomat og brie
 ---
 
 # Ovnsbakt kyllinggryte med tomat og brie

@@ -1,6 +1,7 @@
 ---
 category: middag
-title: Bountykladdkake
+subcategory: kylling
+title: Marry me chicken
 ---
 
 # Marry me chicken

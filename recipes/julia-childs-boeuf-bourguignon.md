@@ -1,6 +1,7 @@
 ---
 category: middag
-title: Bountykladdkake
+subcategory: gryter
+title: Julia Childs Boeuf Bourguignon ⭐
 ---
 
 # Julia Childs Boeuf Bourguignon

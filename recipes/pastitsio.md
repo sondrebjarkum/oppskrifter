@@ -1,6 +1,7 @@
 ---
 category: middag
-title: Bountykladdkake
+subcategory: pai
+title: Pastitsio
 ---
 
 # Pastitsio

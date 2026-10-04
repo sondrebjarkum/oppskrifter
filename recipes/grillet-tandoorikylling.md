@@ -1,6 +1,7 @@
 ---
 category: middag
-title: Bountykladdkake
+subcategory: grillmat
+title: Grillet tandoorikylling
 ---
 
 # Grillet tandoorikylling

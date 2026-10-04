@@ -1,6 +1,6 @@
 ---
 category: dessert
-title: Bountykladdkake
+title: Riskrem med mascarpone (4 porsjoner) ⭐
 ---
 
 # Riskrem med mascarpone (4 porsjoner)

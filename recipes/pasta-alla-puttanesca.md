@@ -1,6 +1,7 @@
 ---
 category: middag
-title: Bountykladdkake
+subcategory: pasta
+title: Pasta alla puttanesca
 ---
 
 # Pasta alla puttanesca

@@ -1,6 +1,6 @@
 ---
 category: sauser
-title: Bountykladdkake
+title: Sennep- og sjallottløksaus ⭐
 ---
 
 # Sennep- og sjallottløksaus

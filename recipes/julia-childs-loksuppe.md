@@ -1,6 +1,7 @@
 ---
-category: supper
-title: Bountykladdkake
+category: middag
+subcategory: supper
+title: Julia Childs løksuppe ⭐
 ---
 
 # Julia Childs løksuppe

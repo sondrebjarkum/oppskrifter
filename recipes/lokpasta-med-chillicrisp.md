@@ -1,6 +1,7 @@
 ---
 category: middag
-title: Bountykladdkake
+subcategory: pasta
+title: Løkpasta med chillicrisp
 ---
 
 # Løkpasta med chillicrisp

@@ -1,6 +1,7 @@
 ---
 category: middag
-title: Bountykladdkake
+subcategory: gryter
+title: Julia Childs Coq au Vin ⭐
 ---
 
 # Julia Childs Coq au Vin

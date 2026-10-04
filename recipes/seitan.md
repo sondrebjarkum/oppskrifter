@@ -1,6 +1,6 @@
 ---
 category: tilbehør/småretter
-title: Bountykladdkake
+title: Seitan
 ---
 
 # Seitan
