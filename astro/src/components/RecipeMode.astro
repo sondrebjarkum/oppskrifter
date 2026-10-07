@@ -1,7 +1,7 @@
 <fieldset class="fieldset not-prose">
   <label class="label">
-    <input type="checkbox" class="toggle" autocomplete="off" data-recipe-mode />
-    Recipe mode
+    <span class="peer-has-checked:text-red-300">Recipe mode</span>
+    <input type="checkbox" class="toggle peer" autocomplete="off" data-recipe-mode />
   </label>
   <p class="label hidden" data-recipe-mode-unsupported>
     Not supported in this browser
@@ -17,7 +17,6 @@
   );
 
   async function requestWakeLock() {
-    console.log("activating recipe mode");
     try {
       wakeLock = await navigator.wakeLock.request("screen");
       wakeLock.addEventListener("release", () => {
@@ -30,7 +29,6 @@
   }
 
   async function releaseWakeLock() {
-    console.log("deactivating recipe mode");
     await wakeLock?.release();
     wakeLock = null;
   }

@@ -5,7 +5,10 @@ import { satteri } from '@astrojs/markdown-satteri';
 
 export default defineConfig({
   site: 'https://sondrebjarkum.github.io',
-  base: '/oppskrifter',
+  base: '/',
+  redirects: {
+    "/oppskrifter": "/",
+  },
   vite: {
     plugins: [tailwindcss()],
   },
