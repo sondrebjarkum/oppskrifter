@@ -3,10 +3,16 @@
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
-    "recipe": "node ./scripts/generate-recipe.js"
+    "recipe": "node ./scripts/generate-recipe.js",
+    "supabase:serve": "pnpm supabase functions serve save-recipe",
+    "supabase:deploy": "pnpm supabase functions deploy save-recipe",
+    "supabase:status": "pnpm supabase status"
   },
   "type": "module",
   "dependencies": {
     "marked": "18.0.14"
+  },
+  "devDependencies": {
+    "supabase": "2.119.0"
   }
 }

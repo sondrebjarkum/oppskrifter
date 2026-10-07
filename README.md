@@ -5,6 +5,9 @@ Github Pages: https://sondrebjarkum.github.io/oppskrifter/
 ## Installasjon
 Kjør `pnpm i` i rot og i `./astro`.
 
+### Supabase
+Kjør `pnpm supabase start`, deretter `pnpm supabase:serve`
+
 ## Kjøre lokalt
 Åpne terminal i `./astro` og kjør `pnpm dev`.
 
