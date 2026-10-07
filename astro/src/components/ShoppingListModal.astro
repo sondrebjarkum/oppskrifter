@@ -1,6 +1,6 @@
 <button
   id="view-shoppinglist"
-  class="btn btn-ghost btn-square"
+  class="btn btn-ghost btn-square view-shoppinglist"
   onclick="shopping_list_modal.showModal()"
 >
   <svg
@@ -20,7 +20,7 @@
 </button>
 <dialog id="shopping_list_modal" class="modal">
   <div class="modal-box">
-    <h3 class="text-lg font-bold">Shopppingslist</h3>
+    <h3 class="text-lg font-bold mb-4">Shopppingslist</h3>
     <!-- add item -->
     <form id="form-shopinglist-add-item">
       <div class="join w-full">
@@ -57,11 +57,20 @@
 
     <div class="modal-action">
       <form method="dialog">
-        <button class="btn">Close</button>
+        <button class="btn btn-sm">Close</button>
       </form>
     </div>
   </div>
 </dialog>
+
+<style>
+  .view-shoppinglist {
+    display: none;
+  }
+  :global(html[data-logged-in]) .view-shoppinglist {
+    display: inline-flex;
+  }
+</style>
 
 <script>
   import { verifySession } from "../integrations/supabase/auth.js";

@@ -1,6 +1,6 @@
 import { supabase } from "./supabase-client.js";
 
-export async function login({ email, password }: {email: string, password: string}) {
+export async function login({ email, password }: { email: string, password: string }) {
   const { data, error } = await supabase.auth.signInWithPassword({
     email: email,
     password: password,
@@ -39,6 +39,6 @@ export async function verifySession() {
   return true;
 }
 
-export function weakVerifySession(){
-  return !!localStorage.getItem("email")
+export function weakVerifySession() {
+  return document.documentElement.dataset.loggedIn === "true";
 }

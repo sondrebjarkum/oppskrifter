@@ -13,6 +13,7 @@
   },
   "dependencies": {
     "@astrojs/markdown-satteri": "0.4.2",
+    "@astrojs/svelte": "^9.0.1",
     "@milkdown/crepe": "7.22.2",
     "@milkdown/kit": "7.22.2",
     "@supabase/supabase-js": "2.117.2",
@@ -20,7 +21,9 @@
     "astro": "7.3.5",
     "daisyui": "5.7.47",
     "satteri": "0.10.5",
-    "tailwindcss": "4.3.3"
+    "svelte": "^5.57.1",
+    "tailwindcss": "4.3.3",
+    "typescript": "^7.0.2"
   },
   "allowScripts": {
     "esbuild": true

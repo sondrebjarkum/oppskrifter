@@ -1,0 +1,11 @@
+---
+import ShoppingList from "../../components/ShoppingList.svelte";
+import Layout from "../../layouts/Layout.astro";
+---
+
+<Layout title="Handleliste">
+  <div class="prose lg:prose-lg max-w-none mx-auto mb-6">
+    <h1>Handleliste</h1>
+  </div>
+  <ShoppingList client:only="svelte" />
+</Layout>
