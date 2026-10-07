@@ -1,0 +1,194 @@
+---
+// https://supabase.com/docs/guides/functions/quickstart
+import Toolbar from "../../../components/Toolbar.astro";
+import Layout from "../../../layouts/Layout.astro";
+import { getCollection, render } from "astro:content";
+
+export async function getStaticPaths() {
+  const recipes = await getCollection("recipes");
+  return recipes.map((recipe) => ({
+    params: { id: recipe.id },
+    props: { recipe },
+  }));
+}
+
+const { recipe } = Astro.props;
+---
+
+<Layout title={"Editing '" + recipe.data.title + "'"}>
+  <Toolbar>
+    <a
+      class="btn btn-ghost"
+      href={`${import.meta.env.BASE_URL.replace(/\/$/, "")}/recipes/${recipe.id}`}
+    >
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        fill="none"
+        viewBox="0 0 24 24"
+        stroke-width="1.5"
+        stroke="currentColor"
+        class="size-6"
+      >
+        <path
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          d="M6.75 15.75 3 12m0 0 3.75-3.75M3 12h18"></path>
+      </svg>
+      Back
+    </a>
+    <div>
+      <div class="tooltip" data-tip="Save">
+        <button class="btn btn-square btn-ghost">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke-width="1.5"
+            stroke="currentColor"
+            class="size-6"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              d="M12 16.5V9.75m0 0 3 3m-3-3-3 3M6.75 19.5a4.5 4.5 0 0 1-1.41-8.775 5.25 5.25 0 0 1 10.233-2.33 3 3 0 0 1 3.758 3.848A3.752 3.752 0 0 1 18 19.5H6.75Z"
+            ></path>
+          </svg>
+        </button>
+      </div>
+    </div>
+  </Toolbar>
+
+  <!-- frontmatter -->
+  <fieldset class="my-4 p-8 border rounded-2xl border-dashed">
+    <legend class="fieldset-legend">Frontmatter</legend>
+    <div id="frontmatter" class="space-y-2">
+      {
+        Object.entries(recipe.data).map(([key, value]) => (
+          <div class="join" data-entry>
+            <input
+              class="input input-bordered w-40"
+              aria-label="Key"
+              data-key
+              value={key}
+            />
+            <input
+              class="input input-bordered flex-1"
+              aria-label="Value"
+              data-value
+              value={String(value ?? "")}
+            />
+            <button type="button" class="btn btn-ghost btn-square" data-remove>
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke-width="1.5"
+                stroke="currentColor"
+                class="size-6"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  d="M12 9.75 14.25 12m0 0 2.25 2.25M14.25 12l2.25-2.25M14.25 12 12 14.25m-2.58 4.92-6.374-6.375a1.125 1.125 0 0 1 0-1.59L9.42 4.83c.21-.211.497-.33.795-.33H19.5a2.25 2.25 0 0 1 2.25 2.25v10.5a2.25 2.25 0 0 1-2.25 2.25h-9.284c-.298 0-.585-.119-.795-.33Z"
+                />
+              </svg>
+            </button>
+          </div>
+        ))
+      }
+    </div>
+    <button type="button" id="add-entry" class="btn btn-sm mt-2">
+      Add entry
+    </button>
+  </fieldset>
+
+  <!-- recipe -->
+  <fieldset class="p-8 border rounded-2xl border-dashed">
+    <legend class="fieldset-legend">Recipe</legend>
+    <div class="prose max-w-none" id="app" data-body={recipe.body}></div>
+  </fieldset>
+</Layout>
+
+<!-- frontmatter -->
+<script>
+  const frontmatter = document.querySelector<HTMLElement>("#frontmatter");
+
+  document.querySelector("#add-entry")?.addEventListener("click", () => {
+    const row = document.createElement("div");
+    row.className = "flex gap-2";
+    row.dataset.entry = "";
+    row.innerHTML = `
+    <div class="join" data-entry>
+      <input class="input input-bordered w-40" aria-label="Key" data-key />
+      <input class="input input-bordered flex-1" aria-label="Value" data-value />
+      <button type="button" class="btn btn-ghost btn-square" data-remove>
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M12 9.75 14.25 12m0 0 2.25 2.25M14.25 12l2.25-2.25M14.25 12 12 14.25m-2.58 4.92-6.374-6.375a1.125 1.125 0 0 1 0-1.59L9.42 4.83c.21-.211.497-.33.795-.33H19.5a2.25 2.25 0 0 1 2.25 2.25v10.5a2.25 2.25 0 0 1-2.25 2.25h-9.284c-.298 0-.585-.119-.795-.33Z" />
+        </svg>
+      </button>
+    </div>
+  `;
+    frontmatter?.append(row);
+    row.querySelector("input")?.focus();
+  });
+
+  frontmatter?.addEventListener("click", (event) => {
+    if (!(event.target instanceof Element)) return;
+    event.target.closest("[data-remove]")?.closest("[data-entry]")?.remove();
+  });
+
+  // function getFrontmatter(): Record<string, string> {
+  //   const entries = Array.from(
+  //     frontmatter?.querySelectorAll<HTMLElement>("[data-entry]") ?? [],
+  //   ).map((row) => [
+  //     row.querySelector<HTMLInputElement>("[data-key]")!.value.trim(),
+  //     row.querySelector<HTMLInputElement>("[data-value]")!.value,
+  //   ]);
+
+  //   return Object.fromEntries(entries.filter(([key]) => key));
+  // }
+</script>
+
+<script>
+  import { Crepe } from "@milkdown/crepe";
+  import "@milkdown/crepe/theme/common/style.css";
+  import "@milkdown/crepe/theme/frame.css";
+  const app = document.querySelector<HTMLElement>("#app");
+
+  if (app) {
+    const crepe = new Crepe({
+      root: "#app",
+      defaultValue: app.dataset.body ?? "",
+      features: {
+        [Crepe.Feature.Toolbar]: true,
+        [Crepe.Feature.BlockEdit]: true,
+        [Crepe.Feature.ListItem]: true,
+        [Crepe.Feature.Table]: true,
+        [Crepe.Feature.LinkTooltip]: true,
+      },
+    });
+
+    crepe.create();
+  }
+</script>
+
+<style>
+  #app :global(.milkdown) {
+    --crepe-font-default: inherit;
+    --crepe-font-title: inherit;
+    --crepe-color-background: transparent;
+
+    --crepe-color-on-background: inherit; /* Text color on background */
+  }
+
+  #app :global(.ProseMirror) {
+    font-family: inherit;
+    font-size: inherit;
+    line-height: inherit;
+  }
+
+  #app :global(.milkdown .editor) {
+    padding-inline: 2rem;
+    padding-top: 0;
+  }
+</style>
