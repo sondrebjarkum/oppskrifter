@@ -6,10 +6,7 @@ import svelte from '@astrojs/svelte';
 
 export default defineConfig({
   site: 'https://sondrebjarkum.github.io',
-  base: '/',
-  redirects: {
-    "/oppskrifter": "/",
-  },
+  base: '/oppskrifter',
   vite: {
     plugins: [tailwindcss()],
   },

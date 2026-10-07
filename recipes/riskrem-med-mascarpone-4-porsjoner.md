@@ -5,7 +5,7 @@ title: Riskrem med mascarpone (4 porsjoner) ⭐
 
 # Riskrem med mascarpone (4 porsjoner)
 
-Perfekt tilbehør: [Appelsinsaus til riskrem](/recipes/appelsinsaus-til-riskrem)
+Perfekt tilbehør: [Appelsinsaus til riskrem](/oppskrifter/recipes/appelsinsaus-til-riskrem)
 
 ## Ingredienser
 
