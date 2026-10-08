@@ -219,6 +219,34 @@ const { recipe } = Astro.props;
           : `Saved! Commit ${data.commit.slice(0, 7)}`,
       );
     });
+
+  document
+    .querySelector("#delete-recipe")
+    ?.addEventListener("click", async () => {
+      const {
+        data: { session },
+      } = await supabase.auth.getSession();
+      if (!session) {
+        alert("Please sign in first");
+        return;
+      }
+
+      const id = app.dataset.id;
+      if (!confirm(`Slett "${id}"? Oppskriften vil bli slettet iløpet av et minutt.`)) return;
+
+      // supabase-js automatically sends the user's JWT
+      const { data, error } = await supabase.functions.invoke("delete-recipe", {
+        body: { id },
+      });
+
+      if (error) {
+        alert(`Delete failed: ${error.message}`);
+        return;
+      }
+
+      alert(`Deleted! Commit ${data.commit.slice(0, 7)}`);
+      window.location.href = `${import.meta.env.BASE_URL.replace(/\/$/, "")}/`;
+    });
 </script>
 
 <style>
