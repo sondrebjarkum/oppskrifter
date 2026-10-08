@@ -2,25 +2,43 @@
   import { onMount } from "svelte";
   import { supabase } from "../integrations/supabase/supabase-client";
 
+  const CATEGORIES = ["default", "hytta"] as const;
+  type Category = (typeof CATEGORIES)[number];
+
   type Item = {
     id: number;
     title: string;
     completed: boolean;
     added_by: string | null;
+    category: string | null;
   };
 
   type NewItem = {
     title?: string;
     completed?: boolean;
+    category?: Category;
   };
 
-  let items = $state<Item[]>([]);
+  let allItems = $state<Item[]>([]);
+  let selectedCategory = $state<Category>("default");
   let loading = $state(true);
   let busy = $state(false);
   let errorMessage = $state("");
   let newTitle = $state("");
   let temporaryId = -1;
   let fetchVersion = 0;
+
+  function categoryOf(item: Item): string {
+    return item.category ?? "default";
+  }
+
+  function toDbCategory(category: Category): string | null {
+    return category === "default" ? null : category;
+  }
+
+  const items = $derived(
+    allItems.filter((item) => categoryOf(item) === selectedCategory),
+  );
 
   const completedCount = $derived(
     items.filter((item) => item.completed).length,
@@ -51,7 +69,7 @@
     if (version !== fetchVersion) return;
     if (error) throw error;
 
-    items = data ?? [];
+    allItems = data ?? [];
   }
 
   function showError(error: unknown) {
@@ -77,7 +95,7 @@
   ) {
     if (busy) return;
 
-    const previousItems = items;
+    const previousItems = allItems;
     busy = true;
     errorMessage = "";
     fetchVersion++;
@@ -88,7 +106,7 @@
       const { error } = await operation();
       if (error) throw error;
     } catch (error) {
-      items = previousItems;
+      allItems = previousItems;
       showError(error);
     } finally {
       busy = false;
@@ -97,22 +115,27 @@
     await refresh();
   }
 
-  async function addItem({ title, completed = false }: NewItem = {}) {
+  async function addItem({
+    title,
+    completed = false,
+    category = selectedCategory,
+  }: NewItem = {}) {
     const trimmedTitle = title?.trim();
     if (!trimmedTitle) return;
 
-    newTitle = ""
+    newTitle = "";
 
     const values = {
       title: trimmedTitle,
       completed,
       added_by: localStorage.getItem("email"),
+      category: toDbCategory(category),
     };
 
     await mutate(
       () => supabase.from("shoppinglistitems").insert(values),
       () => {
-        items = [{ id: temporaryId--, ...values }, ...items];
+        allItems = [{ id: temporaryId--, ...values }, ...allItems];
       },
     );
   }
@@ -133,6 +156,7 @@
   }
 
   async function deleteCheckedItems() {
+    // Only deletes checked items in the currently selected category
     const ids = items.filter((item) => item.completed).map((item) => item.id);
     if (!ids.length) return;
 
@@ -183,6 +207,20 @@
 <div
   class="w-full h-full mx-auto px-0 sm:px-4 py-2 sm:py-8 bg-base flex flex-col border-dashed border-0 sm:border rounded-lg"
 >
+  <div class="mb-4 w-full">
+    <fieldset class="fieldset">
+      <legend class="fieldset-legend">Liste</legend>
+      <select
+        class="select w-full"
+        aria-label="Shopping list category"
+        bind:value={selectedCategory}
+      >
+        {#each CATEGORIES as category}
+          <option value={category}>{category}</option>
+        {/each}
+      </select>
+    </fieldset>
+  </div>
   <div class="mb-7 w-full">
     <form onsubmit={handleAdd}>
       <div class="join w-full">
