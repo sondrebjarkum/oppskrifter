@@ -5,6 +5,7 @@ import RecipeSearch from "../components/RecipeSearch.astro";
 import Toolbar from "../components/Toolbar.astro";
 import Print from "../components/Print.astro";
 import RecipeFilters from "../components/RecipeFilters.astro";
+import RecipeCreate from "../components/RecipeCreate.astro";
 
 const compare = (a: string, b: string) =>
   a.localeCompare(b, "nb", { sensitivity: "base" });
@@ -39,6 +40,7 @@ const grouped = Object.entries(Object.groupBy(recipes, (r) => r.category))
     <RecipeSearch />
     <div class="flex">
       <RecipeFilters />
+      <RecipeCreate />
       <Print />
     </div>
   </Toolbar>
