@@ -4,8 +4,8 @@
   "main": "index.js",
   "scripts": {
     "recipe": "node ./scripts/generate-recipe.js",
-    "supabase:serve": "pnpm supabase functions serve save-recipe",
-    "supabase:deploy": "pnpm supabase functions deploy save-recipe",
+    "supabase:serve": "pnpm supabase functions serve",
+    "supabase:deploy": "pnpm supabase functions deploy",
     "supabase:status": "pnpm supabase status"
   },
   "type": "module",

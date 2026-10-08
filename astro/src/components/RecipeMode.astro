@@ -1,12 +1,14 @@
-<fieldset class="fieldset not-prose">
-  <label class="label">
-    <input type="checkbox" class="toggle peer" autocomplete="off" data-recipe-mode />
-    <span class="peer-checked:text-base-content">Recipe mode</span>
-  </label>
-  <p class="label hidden" data-recipe-mode-unsupported>
-    Not supported in this browser
-  </p>
-</fieldset>
+<div class="tooltip" data-tip="Hindrer skjermlås">
+  <fieldset class="fieldset not-prose">
+    <label class="label">
+      <input type="checkbox" class="toggle peer" autocomplete="off" data-recipe-mode />
+      <span class="peer-checked:text-base-content">Recipe mode</span>
+    </label>
+    <p class="label hidden" data-recipe-mode-unsupported>
+      Not supported in this browser
+    </p>
+  </fieldset>
+</div>
 
 <script>
   let wakeLock: WakeLockSentinel | null = null;

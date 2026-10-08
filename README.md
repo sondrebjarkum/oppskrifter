@@ -8,6 +8,8 @@ Kjør `pnpm i` i rot og i `./astro`.
 ### Supabase
 Kjør `pnpm supabase start`, deretter `pnpm supabase:serve`
 
+sett opp en PAT i github,, oppdater .env med GITHUB_ env-er, lag secrets i Supabase med `supabase secrets set --env-file ./astro/.env`
+
 ## Kjøre lokalt
 Åpne terminal i `./astro` og kjør `pnpm dev`.
 

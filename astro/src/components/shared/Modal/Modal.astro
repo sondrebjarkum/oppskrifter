@@ -1,0 +1,32 @@
+---
+const { id, title } = Astro.props;
+---
+
+<dialog id={id} class="modal">
+  <div class="modal-box">
+    <div class="grid grid-cols-2 mb-6">
+      <div class="flex items-center">
+        <h3 class="text-lg font-bold">{title}</h3>
+      </div>
+      <form method="dialog" class="justify-self-end w-fit">
+        <button class="btn btn-ghost btn-circle">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke-width="1.5"
+            stroke="currentColor"
+            class="size-6"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              d="M6 18 18 6M6 6l12 12"></path>
+          </svg>
+        </button>
+      </form>
+    </div>
+
+    <slot />
+  </div>
+</dialog>
