@@ -235,15 +235,15 @@
   {/if}
 
   <div
-    class="w-full sm:h-[50vh] rounded shadow mb-8 flex-1 shrink basis-auto overflow-x-auto"
+    class="w-full sm:h-[50vh] rounded mb-8 flex-1 shrink basis-auto overflow-x-auto"
     aria-busy={loading}
   >
     {#if loading}
-      <div class="skeleton h-16 w-full mb-1"></div>
-      <div class="skeleton h-16 w-full mb-1"></div>
-      <div class="skeleton h-16 w-full mb-1"></div>
-      <div class="skeleton h-16 w-full mb-1"></div>
-      <div class="skeleton h-16 w-full mb-1"></div>
+      <div class="skeleton bg-accent-content/10 h-16 w-full mb-1"></div>
+      <div class="skeleton bg-accent-content/10 h-16 w-full mb-1"></div>
+      <div class="skeleton bg-accent-content/10 h-16 w-full mb-1"></div>
+      <div class="skeleton bg-accent-content/10 h-16 w-full mb-1"></div>
+      <div class="skeleton bg-accent-content/10 h-16 w-full mb-1"></div>
     {:else}
       {#each items as item, index (item.id)}
         <div
@@ -262,7 +262,7 @@
 
           <div class="text-center flex gap-4 items-center">
             <div
-              class="badge badge-soft badge-sm badge-secondary ${userBackgroundColor(
+              class="badge badge-soft badge-sm ${userBackgroundColor(
                 item.added_by,
               )}"
             >
