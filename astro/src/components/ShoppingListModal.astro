@@ -1,26 +1,30 @@
-<button
-  id="view-shoppinglist"
-  class="btn btn-ghost btn-square view-shoppinglist"
-  onclick="shopping_list_modal.showModal()"
->
-  <svg
-    xmlns="http://www.w3.org/2000/svg"
-    fill="none"
-    viewBox="0 0 24 24"
-    stroke-width="1.5"
-    stroke="currentColor"
-    class="size-6"
+---
+import Modal from "./shared/Modal/Modal.astro";
+---
+
+<div class="tooltip" data-tip="Se handlelisten">
+  <button
+    id="view-shoppinglist"
+    class="btn btn-ghost btn-square hidden logged-in:inline-flex"
+    onclick="shopping_list_modal.showModal()"
   >
-    <path
-      stroke-linecap="round"
-      stroke-linejoin="round"
-      d="M8.25 6.75h12M8.25 12h12m-12 5.25h12M3.75 6.75h.007v.008H3.75V6.75Zm.375 0a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0ZM3.75 12h.007v.008H3.75V12Zm.375 0a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0Zm-.375 5.25h.007v.008H3.75v-.008Zm.375 0a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0Z"
-    ></path>
-  </svg>
-</button>
-<dialog id="shopping_list_modal" class="modal">
-  <div class="modal-box">
-    <h3 class="text-lg font-bold mb-4">Shopppingslist</h3>
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      fill="none"
+      viewBox="0 0 24 24"
+      stroke-width="1.5"
+      stroke="currentColor"
+      class="size-6"
+    >
+      <path
+        stroke-linecap="round"
+        stroke-linejoin="round"
+        d="M8.25 6.75h12M8.25 12h12m-12 5.25h12M3.75 6.75h.007v.008H3.75V6.75Zm.375 0a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0ZM3.75 12h.007v.008H3.75V12Zm.375 0a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0Zm-.375 5.25h.007v.008H3.75v-.008Zm.375 0a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0Z"
+      ></path>
+    </svg>
+  </button>
+</div>
+<Modal id="shopping_list_modal" title="Handlelisten">
     <!-- add item -->
     <form id="form-shopinglist-add-item">
       <div class="join w-full">
@@ -54,23 +58,7 @@
       id="shoppinglist-content"
     >
     </ul>
-
-    <div class="modal-action">
-      <form method="dialog">
-        <button class="btn btn-sm">Close</button>
-      </form>
-    </div>
-  </div>
-</dialog>
-
-<style>
-  .view-shoppinglist {
-    display: none;
-  }
-  :global(html[data-logged-in]) .view-shoppinglist {
-    display: inline-flex;
-  }
-</style>
+</Modal>
 
 <script>
   import { verifySession } from "../integrations/supabase/auth.js";

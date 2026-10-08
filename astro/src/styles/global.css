@@ -7,3 +7,6 @@
 @theme {
   --font-sans: Helvetica, Arial, sans-serif;
 }
+
+@custom-variant logged-in (&:where(html[data-logged-in] *));
+@custom-variant logged-out (&:where(html:not([data-logged-in]) *));

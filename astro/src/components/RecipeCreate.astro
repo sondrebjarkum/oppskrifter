@@ -2,7 +2,7 @@
 import Modal from "./shared/Modal/Modal.astro";
 ---
 
-<div class="tooltip" data-tip="Ny oppskrift">
+<div class="tooltip hidden logged-in:inline-block" data-tip="Ny oppskrift">
   <button
     class="btn btn-square btn-ghost"
     onclick="create_recipe_modal.showModal()"
