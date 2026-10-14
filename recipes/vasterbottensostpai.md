@@ -1,10 +1,10 @@
 ---
-title: "Västerbottensostpai"
+title: "Pai med västerbottenost"
 category: "middag"
 subcategory: "pai"
 ---
 
-# Västerbottensostpai
+# Pai med västerbottenost
 
 ## Ingredienser
 
