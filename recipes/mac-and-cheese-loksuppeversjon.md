@@ -1,6 +1,7 @@
 ---
 title: "Mac and cheese - løksuppeversjon"
 category: "middag"
+subcategory: "pasta"
 ---
 
 # Mac and cheese - løksuppeversjon
