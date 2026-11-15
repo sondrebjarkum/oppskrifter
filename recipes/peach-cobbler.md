@@ -1,13 +1,14 @@
 ---
-category: "Dessert"
 title: "Peach cobbler"
-source: "https://tastesbetterfromscratch.com/peach-cobbler/"
+category: "dessert"
 ---
 
 # Peach cobbler
 
 ## Ingredienser
-- 
+
+* <br />
 
 ## Fremgangsmåte
-1.
+
+1. <https://tastesbetterfromscratch.com/peach-cobbler/>
